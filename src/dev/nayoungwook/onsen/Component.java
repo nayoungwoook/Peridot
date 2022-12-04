@@ -5,30 +5,50 @@ import java.awt.Color;
 import java.awt.Graphics;
 import java.awt.Graphics2D;
 import java.awt.image.BufferStrategy;
-import java.awt.image.BufferedImage;
-import java.io.IOException;
+import java.util.ArrayList;
+import java.util.Collections;
 
-import javax.imageio.ImageIO;
+import dev.nayoungwook.onsen.input.Input;
+import dev.nayoungwook.onsen.object.GameObject;
+import dev.nayoungwook.onsen.scene.Scene;
 
 public class Component extends Canvas implements Runnable {
 
 	private static final long serialVersionUID = 1L;
-	public BufferedImage image;
+	public static int width, height;
+
+	public static Scene scene;
+	private Scene backupScene;
+
+	public static ArrayList<GameObject> renderQueue = new ArrayList<GameObject>();
 
 	public void start() {
 		new Thread(this, "GameThread").start();
+
+		addKeyListener(new Input());
+		addMouseListener(new Input());
+		addMouseMotionListener(new Input());
 	}
 
-	private void init() throws IOException {
-		image = ImageIO.read(getClass().getClassLoader().getResource("hd.png"));
+	private void init() {
 	}
 
 	private void update() {
+		width = this.getParent().getWidth();
+		height = this.getParent().getHeight();
 
+		if (scene != null) {
+			if (backupScene != scene) {
+				backupScene = scene;
+				scene.init();
+			}
+		}
+
+		if (scene != null)
+			scene.update();
 	}
 
 	private void render() {
-
 		BufferStrategy bs = getBufferStrategy();
 		if (bs == null) {
 			createBufferStrategy(3);
@@ -41,7 +61,16 @@ public class Component extends Canvas implements Runnable {
 		g2d.setColor(Color.black);
 		g2d.fillRect(0, 0, getWidth(), getHeight());
 
-		g2d.drawImage(image, getWidth() / 2 - 1982 / 4, getHeight() / 2 - 3000 / 4, 1982 / 2, 3000 / 2, null);
+		if (scene != null)
+			scene.render();
+
+		Collections.sort(renderQueue);
+
+		for (int i = 0; i < renderQueue.size(); i++) {
+			renderQueue.get(i)._render(g2d);
+		}
+
+		renderQueue.clear();
 
 		bs.show();
 		g.dispose();
@@ -56,11 +85,7 @@ public class Component extends Canvas implements Runnable {
 		int frames = 0, ticks = 0;
 		long timer = System.currentTimeMillis();
 
-		try {
-			init();
-		} catch (IOException e) {
-			e.printStackTrace();
-		}
+		init();
 
 		while (true) {
 			long currentTime = System.nanoTime();
