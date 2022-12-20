@@ -1,4 +1,4 @@
-package dev.nayoungwook.onsen.math;
+package dev.nayoungwook.peridot.math;
 
 public class Vector {
 

@@ -1,4 +1,4 @@
-package dev.nayoungwook.onsen.input;
+package dev.nayoungwook.peridot.input;
 
 import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;
@@ -8,7 +8,7 @@ import java.awt.event.MouseMotionListener;
 import java.awt.event.MouseWheelEvent;
 import java.awt.event.MouseWheelListener;
 
-import dev.nayoungwook.onsen.math.Vector;
+import dev.nayoungwook.peridot.math.Vector;
 
 public class Input implements KeyListener, MouseListener, MouseMotionListener, MouseWheelListener {
 

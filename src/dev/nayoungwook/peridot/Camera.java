@@ -1,6 +1,6 @@
-package dev.nayoungwook.onsen;
+package dev.nayoungwook.peridot;
 
-import dev.nayoungwook.onsen.math.Vector;
+import dev.nayoungwook.peridot.math.Vector;
 
 public class Camera {
 

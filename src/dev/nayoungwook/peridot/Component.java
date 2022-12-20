@@ -1,4 +1,4 @@
-package dev.nayoungwook.onsen;
+package dev.nayoungwook.peridot;
 
 import java.awt.Canvas;
 import java.awt.Color;
@@ -8,9 +8,9 @@ import java.awt.image.BufferStrategy;
 import java.util.ArrayList;
 import java.util.Collections;
 
-import dev.nayoungwook.onsen.input.Input;
-import dev.nayoungwook.onsen.object.GameObject;
-import dev.nayoungwook.onsen.scene.Scene;
+import dev.nayoungwook.peridot.input.Input;
+import dev.nayoungwook.peridot.object.GameObject;
+import dev.nayoungwook.peridot.scene.Scene;
 
 public class Component extends Canvas implements Runnable {
 
@@ -28,12 +28,13 @@ public class Component extends Canvas implements Runnable {
 		addKeyListener(new Input());
 		addMouseListener(new Input());
 		addMouseMotionListener(new Input());
+		addMouseWheelListener(new Input());
 	}
 
 	private void init() {
 	}
 
-	private void update() {
+	private void tick() {
 		width = this.getParent().getWidth();
 		height = this.getParent().getHeight();
 
@@ -45,7 +46,7 @@ public class Component extends Canvas implements Runnable {
 		}
 
 		if (scene != null)
-			scene.update();
+			scene.tick();
 	}
 
 	private void render() {
@@ -61,9 +62,11 @@ public class Component extends Canvas implements Runnable {
 		g2d.setColor(Color.black);
 		g2d.fillRect(0, 0, getWidth(), getHeight());
 
+		// render queue management
 		if (scene != null)
 			scene.render();
 
+		// sort render queue with z
 		Collections.sort(renderQueue);
 
 		for (int i = 0; i < renderQueue.size(); i++) {
@@ -72,8 +75,20 @@ public class Component extends Canvas implements Runnable {
 
 		renderQueue.clear();
 
+		// light
+
+//		Area screenArea = new Area(new Rectangle2D.Double(0, 0, getWidth(), getHeight()));
+//
+//		Shape circle = new Ellipse2D.Double(200, 200, 100, 100);
+//
+//		screenArea.subtract(new Area(circle));
+//
+//		g2d.setColor(new Color(0, 0, 0, 0.98f));
+//		g2d.fill(screenArea);
+
 		bs.show();
 		g.dispose();
+		g2d.dispose();
 	}
 
 	@Override
@@ -94,7 +109,7 @@ public class Component extends Canvas implements Runnable {
 			initialTime = currentTime;
 
 			if (deltaU >= 1) {
-				update();
+				tick();
 				ticks++;
 				deltaU--;
 			}

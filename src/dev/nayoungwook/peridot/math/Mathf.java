@@ -1,7 +1,7 @@
-package dev.nayoungwook.onsen.math;
+package dev.nayoungwook.peridot.math;
 
-import dev.nayoungwook.onsen.Camera;
-import dev.nayoungwook.onsen.Component;
+import dev.nayoungwook.peridot.Camera;
+import dev.nayoungwook.peridot.Component;
 
 public class Mathf {
 

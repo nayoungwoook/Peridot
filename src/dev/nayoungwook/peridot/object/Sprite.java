@@ -1,4 +1,4 @@
-package dev.nayoungwook.onsen.object;
+package dev.nayoungwook.peridot.object;
 
 import java.awt.image.BufferedImage;
 import java.io.IOException;

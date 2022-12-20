@@ -1,12 +1,12 @@
-package dev.nayoungwook.onsen.object;
+package dev.nayoungwook.peridot.object;
 
 import java.awt.Graphics2D;
 import java.awt.geom.AffineTransform;
 
-import dev.nayoungwook.onsen.Camera;
-import dev.nayoungwook.onsen.Component;
-import dev.nayoungwook.onsen.math.Mathf;
-import dev.nayoungwook.onsen.math.Vector;
+import dev.nayoungwook.peridot.Camera;
+import dev.nayoungwook.peridot.Component;
+import dev.nayoungwook.peridot.math.Mathf;
+import dev.nayoungwook.peridot.math.Vector;
 
 public class GameObject implements Comparable<GameObject> {
 
@@ -37,7 +37,6 @@ public class GameObject implements Comparable<GameObject> {
 			return;
 
 		/* Actual object rendering */
-
 		renderPosition = Mathf.calculateRenderPosition(position);
 
 		Vector s = Mathf.calculateRenderSize(width, height, flipx, flipy);
@@ -57,7 +56,7 @@ public class GameObject implements Comparable<GameObject> {
 		g.translate(this.renderPosition.x, this.renderPosition.y);
 		g.rotate(rotation + Camera.rotation, this.renderWidth * anchor.x, this.renderHeight * anchor.y);
 
-		g.drawImage(sprite.getImage(), 0, 0, renderWidth, renderHeight, null);
+		g.drawImage(sprite.getImage(), 0, 0, (int) Math.ceil(renderWidth), (int) Math.ceil(renderHeight), null);
 
 		g.setTransform(backup);
 	}
@@ -65,6 +64,9 @@ public class GameObject implements Comparable<GameObject> {
 	public void render() {
 		/* Add this object into render queue */
 		Component.renderQueue.add(this);
+	}
+
+	public void tick() {
 	}
 
 	@Override

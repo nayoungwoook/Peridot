@@ -1,4 +1,4 @@
-package dev.nayoungwook.onsen;
+package dev.nayoungwook.peridot;
 
 import java.awt.Dimension;
 
@@ -31,6 +31,10 @@ public class Display extends JFrame {
 		add(compo);
 		pack();
 		compo.start();
+	}
+
+	// tick for engine
+	public void _tick() {
 
 	}
 

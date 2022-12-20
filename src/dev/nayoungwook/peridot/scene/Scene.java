@@ -1,10 +1,10 @@
-package dev.nayoungwook.onsen.scene;
+package dev.nayoungwook.peridot.scene;
 
 public interface Scene {
 
 	public void init();
 
-	public void update();
+	public void tick();
 
 	public void render();
 
