@@ -1,36 +1,29 @@
 package dev.nayoungwook.workspace;
 
-import java.util.ArrayList;
+import java.awt.Color;
 
 import com.sun.glass.events.KeyEvent;
 
 import dev.nayoungwook.peridot.Camera;
 import dev.nayoungwook.peridot.input.Input;
 import dev.nayoungwook.peridot.math.Vector;
-import dev.nayoungwook.peridot.object.GameObject;
 import dev.nayoungwook.peridot.object.Sprite;
+import dev.nayoungwook.peridot.object.font.Font;
+import dev.nayoungwook.peridot.renderer.Renderer;
 import dev.nayoungwook.peridot.scene.Scene;
 
 public class Worksapce implements Scene {
 
-	private ArrayList<GameObject> objects = new ArrayList<GameObject>();
 	private Vector cameraTarget;
 	private double cameraRotation = 0;
+	private Sprite spr = new Sprite("hd.png");
+	private Font font = new Font("gmksans.ttf");
 
 	@Override
 	public void init() {
-
-		Sprite spr = new Sprite("hd.png");
 		cameraTarget = new Vector(0, 0, 1);
 
-		int sw = 1983 / 2, sh = 3000 / 2;
-
-		for (int i = 0; i < 90; i++) {
-			for (int j = 0; j < 90; j++) {
-				objects.add(new GameObject(i * sw, j * sh, sw, sh));
-				objects.get(objects.size() - 1).sprite = spr;
-			}
-		}
+		int sw = 1983 / 15, sh = 3000 / 15;
 	}
 
 	@Override
@@ -67,8 +60,10 @@ public class Worksapce implements Scene {
 
 	@Override
 	public void render() {
-		for (int i = 0; i < objects.size(); i++)
-			objects.get(i).render();
+		Renderer.image(spr, String.format("{x:%d, y:%d, width:%d, height:%d}", 100, 100, 200, 200));
+		Renderer.text("test", new Color(255, 255, 245), font, String.format("{x:%d, y:%d}", 100, 100, 200, 200));
+//		Renderer.text("test", new Color(255, 255, 245), 300, 300, font);
+//		Renderer.textUI("test", new Color(255, 255, 245), 300, 300, font);
 	}
 
 }

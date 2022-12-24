@@ -76,7 +76,6 @@ public class Component extends Canvas implements Runnable {
 		renderQueue.clear();
 
 		// light
-
 //		Area screenArea = new Area(new Rectangle2D.Double(0, 0, getWidth(), getHeight()));
 //
 //		Shape circle = new Ellipse2D.Double(200, 200, 100, 100);

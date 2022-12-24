@@ -19,6 +19,7 @@ public class GameObject implements Comparable<GameObject> {
 	public float rotation = 0f;
 	public Sprite sprite;
 	public boolean flipx, flipy;
+	public boolean visible = true;
 
 	public GameObject(float x, float y, int width, int height) {
 		position = new Vector(x, y, 1);
@@ -32,7 +33,7 @@ public class GameObject implements Comparable<GameObject> {
 		this.height = 100;
 	}
 
-	public final void _render(Graphics2D g) {
+	public void _render(Graphics2D g) {
 		if (sprite == null)
 			return;
 
@@ -55,8 +56,8 @@ public class GameObject implements Comparable<GameObject> {
 		AffineTransform backup = g.getTransform();
 		g.translate(this.renderPosition.x, this.renderPosition.y);
 		g.rotate(rotation + Camera.rotation, this.renderWidth * anchor.x, this.renderHeight * anchor.y);
-
-		g.drawImage(sprite.getImage(), 0, 0, (int) Math.ceil(renderWidth), (int) Math.ceil(renderHeight), null);
+		if (visible)
+			g.drawImage(sprite.getImage(), 0, 0, (int) Math.ceil(renderWidth), (int) Math.ceil(renderHeight), null);
 
 		g.setTransform(backup);
 	}

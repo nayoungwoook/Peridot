@@ -33,11 +33,6 @@ public class Display extends JFrame {
 		compo.start();
 	}
 
-	// tick for engine
-	public void _tick() {
-
-	}
-
 	@Override
 	public String getTitle() {
 		return title;
