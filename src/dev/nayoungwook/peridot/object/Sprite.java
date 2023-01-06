@@ -7,7 +7,7 @@ import javax.imageio.ImageIO;
 
 public class Sprite {
 
-	private BufferedImage image;
+	public BufferedImage image;
 
 	public Sprite(String path) {
 		try {
@@ -17,8 +17,16 @@ public class Sprite {
 		}
 	}
 
-	public BufferedImage getImage() {
-		return image;
+	public Sprite cloneImage() {
+		Sprite spr = new Sprite("");
+		spr.image = image;
+
+		return spr;
+	}
+
+	public Sprite cutImage(int x, int y, int w, int h) {
+		image = image.getSubimage(x, y, w, h);
+		return this;
 	}
 
 }

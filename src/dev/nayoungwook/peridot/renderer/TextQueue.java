@@ -22,6 +22,7 @@ public class TextQueue extends GameObject {
 
 	public TextQueue(String str, float x, float y, Font font, boolean ui) {
 		super(x, y, 0, 0);
+
 		this.font = font;
 		this.str = str;
 		this.ui = ui;
@@ -33,26 +34,46 @@ public class TextQueue extends GameObject {
 
 	@Override
 	public void _render(Graphics2D g) {
-		if (ui) {
-			int x = 0;
-			FontMetrics metrics = g.getFontMetrics();
 
+		FontMetrics metrics = g.getFontMetrics();
+		this.width = metrics.stringWidth(str);
+		this.height = metrics.getHeight();
+
+		if (ui) {
+
+			float backupX = position.x;
 			if (textAlign.equals("center"))
-				x = (int) (position.x - metrics.stringWidth(str) / 2);
+				position.x -= metrics.stringWidth(str) / 2;
 			else if (textAlign.equals("right"))
-				x = (int) (position.x - metrics.stringWidth(str));
-			else
-				x = (int) (position.x);
+				position.x -= metrics.stringWidth(str);
+			position.x = backupX;
+
 			int y = metrics.getHeight() / 2;
 
 			if (visible) {
 				g.setColor(color);
 				g.setFont(font.getFont());
-				g.drawString(str, x, y);
+				g.drawString(str, position.x, position.y - y);
 			}
 		} else {
 			/* Actual object rendering */
+
+			g.setFont(font.getFont());
+
+			float backupX = position.x;
+			float backupY = position.y;
+
+			position.y += metrics.getHeight() / 2;
+			if (textAlign.equals("center"))
+				position.x -= metrics.stringWidth(str) / 2;
+			else if (textAlign.equals("right"))
+				position.x -= metrics.stringWidth(str);
+
 			renderPosition = Mathf.calculateRenderPosition(position);
+
+			position.x = backupX;
+			position.y = backupY;
+
 			Vector s = Mathf.calculateRenderSize(width, height, flipx, flipy);
 			renderWidth = (int) s.x;
 			renderHeight = (int) s.y;
@@ -68,19 +89,7 @@ public class TextQueue extends GameObject {
 
 			AffineTransform backup = g.getTransform();
 
-			g.setFont(font.getFont());
-			FontMetrics metrics = g.getFontMetrics();
-
-			int x = 0;
-
-			if (textAlign.equals("center"))
-				x = (int) (renderPosition.x - metrics.stringWidth(str) / 2);
-			else if (textAlign.equals("right"))
-				x = (int) (renderPosition.x - metrics.stringWidth(str));
-			else
-				x = (int) (renderPosition.x);
-
-			g.translate(x, this.renderPosition.y + metrics.getHeight() / 2);
+			g.translate(this.renderPosition.x, this.renderPosition.y);
 			g.rotate(rotation + Camera.rotation, this.renderWidth * anchor.x, this.renderHeight * anchor.y);
 
 			g.setColor(color);

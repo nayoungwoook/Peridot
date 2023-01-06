@@ -12,6 +12,26 @@ public class Mathf {
 		return Math.sqrt((v1.x - v2.x) * (v1.x - v2.x) + (v1.y - v2.y) * (v1.y - v2.y));
 	}
 
+	public static double getAngle(Vector v1, Vector v2) {
+		return Math.atan2(v2.y - v1.y, v2.x - v1.x);
+	}
+
+	public static double getXv(float moveSpeed, Vector v1, Vector v2) {
+		return Math.cos(getAngle(v1, v2)) * moveSpeed;
+	}
+
+	public static double getYv(float moveSpeed, Vector v1, Vector v2) {
+		return Math.sin(getAngle(v1, v2)) * moveSpeed;
+	}
+
+	public static double getXv(float moveSpeed, float rotation) {
+		return Math.cos(rotation) * moveSpeed;
+	}
+
+	public static double getYv(float moveSpeed, float rotation) {
+		return Math.sin(rotation) * moveSpeed;
+	}
+
 	public static Vector calculateRenderSize(int width, int height, boolean flipx, boolean flipy) {
 		float fx = 1, fy = 1;
 

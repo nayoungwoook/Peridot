@@ -24,6 +24,7 @@ public class RectQueue extends GameObject {
 	public void _render(Graphics2D g) {
 		if (!visible)
 			return;
+
 		if (ui) {
 			g.setColor(color);
 			g.fillRect((int) (position.x - width / 2), (int) (position.y - height / 2), width, height);
@@ -48,7 +49,7 @@ public class RectQueue extends GameObject {
 			g.rotate(rotation + Camera.rotation, this.renderWidth * anchor.x, this.renderHeight * anchor.y);
 
 			g.setColor(color);
-			g.fillRect((int) renderPosition.x, (int) renderPosition.y, renderWidth, renderHeight);
+			g.fillRect(0, 0, renderWidth, renderHeight);
 
 			g.setTransform(backup);
 		}

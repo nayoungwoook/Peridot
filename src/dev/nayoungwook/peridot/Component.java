@@ -16,6 +16,7 @@ public class Component extends Canvas implements Runnable {
 
 	private static final long serialVersionUID = 1L;
 	public static int width, height;
+	public static int currentFps;
 
 	public static Scene scene;
 	private Scene backupScene;
@@ -75,16 +76,6 @@ public class Component extends Canvas implements Runnable {
 
 		renderQueue.clear();
 
-		// light
-//		Area screenArea = new Area(new Rectangle2D.Double(0, 0, getWidth(), getHeight()));
-//
-//		Shape circle = new Ellipse2D.Double(200, 200, 100, 100);
-//
-//		screenArea.subtract(new Area(circle));
-//
-//		g2d.setColor(new Color(0, 0, 0, 0.98f));
-//		g2d.fill(screenArea);
-
 		bs.show();
 		g.dispose();
 		g2d.dispose();
@@ -120,6 +111,7 @@ public class Component extends Canvas implements Runnable {
 			}
 
 			if (System.currentTimeMillis() - timer > 1000) {
+				currentFps = frames;
 				System.out.println(String.format("UPS: %s, FPS: %s", ticks, frames));
 				frames = 0;
 				ticks = 0;

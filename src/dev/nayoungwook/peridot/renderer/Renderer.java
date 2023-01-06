@@ -74,6 +74,8 @@ public class Renderer {
 
 		TextQueue tq = new TextQueue(str, obj.getInt("x"), obj.getInt("y"), f, ui);
 		tq.color = c;
+		tq.width = 0;
+		tq.height = 0;
 
 		if (obj.has("align"))
 			tq.setTextAlign(obj.getString("align"));

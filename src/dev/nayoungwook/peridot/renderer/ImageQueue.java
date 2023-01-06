@@ -23,7 +23,7 @@ public class ImageQueue extends GameObject {
 			if (sprite == null)
 				return;
 			if (visible)
-				g.drawImage(sprite.getImage(), (int) (position.x - width / 2), (int) (position.y - height / 2), width,
+				g.drawImage(sprite.image, (int) (position.x - width / 2), (int) (position.y - height / 2), width,
 						height, null);
 		}
 	}

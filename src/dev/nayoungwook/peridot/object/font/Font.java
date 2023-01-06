@@ -37,7 +37,6 @@ public class Font {
 	}
 
 	public java.awt.Font getFont() {
-		_font = loadFont();
 		return _font;
 	}
 

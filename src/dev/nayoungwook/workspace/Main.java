@@ -7,7 +7,7 @@ public class Main {
 
 	public static void main(String[] args) {
 		new Display("Peridot", 800, 600);
-		Component.scene = new Worksapce();
+		Component.scene = new Workspace();
 	}
 
 }
