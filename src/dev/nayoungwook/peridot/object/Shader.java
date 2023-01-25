@@ -19,7 +19,7 @@ public class Shader {
 	public static void applicateShader(Sprite sprite, String _format) {
 		JSONObject format = new JSONObject(_format);
 
-		BufferedImage image = sprite.image;
+		BufferedImage image = sprite.cloneImage().image;
 
 		if (format.has("tint")) {
 			JSONObject tint = format.getJSONObject("tint");
@@ -36,7 +36,7 @@ public class Shader {
 					int fg = rgbLimit(c.getGreen() + tg);
 					int fb = rgbLimit(c.getBlue() + tb);
 
-					int r = 255 << 24 | fr << 16 | fg << 8 | fb;
+					int r = 0 << 24 | fr << 16 | fg << 8 | fb;
 
 					image.setRGB(i, j, r);
 				}

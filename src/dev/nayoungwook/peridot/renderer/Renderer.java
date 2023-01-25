@@ -65,6 +65,34 @@ public class Renderer {
 		rq.render();
 	}
 
+	public static final void oval(Color c, String conf) {
+		JSONObject obj = new JSONObject(conf);
+
+		boolean ui = false;
+		if (obj.has("ui"))
+			ui = obj.getBoolean("ui");
+
+		OvalQueue oq = new OvalQueue(obj.getInt("x"), obj.getInt("y"), obj.getInt("width"), obj.getInt("height"), ui);
+		oq.color = c;
+
+		if (obj.has("z"))
+			oq.position.z = obj.getFloat("z");
+		if (obj.has("rotation"))
+			oq.rotation = obj.getFloat("rotation");
+		if (obj.has("flipx"))
+			oq.flipx = obj.getBoolean("flipx");
+		if (obj.has("flipy"))
+			oq.flipy = obj.getBoolean("flipy");
+		if (obj.has("visible"))
+			oq.visible = obj.getBoolean("visible");
+		if (obj.has("anchorx"))
+			oq.anchor.x = obj.getFloat("anchorx");
+		if (obj.has("anchory"))
+			oq.anchor.y = obj.getFloat("anchory");
+
+		oq.render();
+	}
+
 	public static final void text(String str, Color c, Font f, String conf) {
 		JSONObject obj = new JSONObject(conf);
 
