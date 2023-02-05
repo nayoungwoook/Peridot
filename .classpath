@@ -7,6 +7,6 @@
 			<attribute name="module" value="true"/>
 		</attributes>
 	</classpathentry>
-	<classpathentry kind="lib" path="D:/Workspace/DevStyle/Libraries/json.jar"/>
+	<classpathentry kind="lib" path="res/json.jar"/>
 	<classpathentry kind="output" path="bin"/>
 </classpath>
