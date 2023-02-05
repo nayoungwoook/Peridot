@@ -91,7 +91,7 @@ public class GameObject implements Comparable<GameObject> {
 		g.rotate(rotation + Camera.rotation, this.renderWidth * anchor.x, this.renderHeight * anchor.y);
 
 		if (visible)
-			g.drawImage(sprite.image, 0, 0, (int) Math.ceil(renderWidth), (int) Math.ceil(renderHeight), null);
+			g.drawImage(sprite.image, 0, 0, renderWidth, renderHeight, null);
 
 		g.setTransform(backup);
 	}

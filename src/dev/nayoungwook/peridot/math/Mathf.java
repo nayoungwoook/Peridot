@@ -37,8 +37,8 @@ public class Mathf {
 
 		float renderWidth, renderHeight;
 
-		renderWidth = width * (Camera.position.z);
-		renderHeight = height * (Camera.position.z);
+		renderWidth = (float) Math.ceil(width * (Camera.position.z));
+		renderHeight = (float) Math.ceil(height * (Camera.position.z));
 
 		if (flipx) {
 			fx = -1;
