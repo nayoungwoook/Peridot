@@ -1,5 +1,6 @@
 package dev.nayoungwook.peridot.object;
 
+import java.awt.Graphics;
 import java.awt.image.BufferedImage;
 import java.io.IOException;
 
@@ -11,7 +12,18 @@ public class Sprite {
 
 	public Sprite(String path) {
 		try {
-			image = ImageIO.read(getClass().getClassLoader().getResource(path));
+
+			BufferedImage _image = ImageIO.read(getClass().getClassLoader().getResource(path));
+
+			if (_image != null) {
+				BufferedImage _result = new BufferedImage(_image.getWidth(), _image.getHeight(),
+						BufferedImage.TYPE_INT_ARGB);
+
+				Graphics g = _result.getGraphics();
+				g.drawImage(_image, 0, 0, _image.getWidth(), _image.getHeight(), null);
+
+				image = _result;
+			}
 		} catch (IOException e) {
 			e.printStackTrace();
 		}

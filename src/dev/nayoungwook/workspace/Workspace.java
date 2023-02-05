@@ -1,13 +1,14 @@
 package dev.nayoungwook.workspace;
 
 import java.awt.event.KeyEvent;
+import java.util.ArrayList;
 
 import dev.nayoungwook.peridot.Camera;
 import dev.nayoungwook.peridot.Component;
 import dev.nayoungwook.peridot.input.Input;
 import dev.nayoungwook.peridot.math.Vector;
+import dev.nayoungwook.peridot.object.GameObject;
 import dev.nayoungwook.peridot.object.Sprite;
-import dev.nayoungwook.peridot.renderer.Renderer;
 import dev.nayoungwook.peridot.scene.Scene;
 
 public class Workspace implements Scene {
@@ -15,10 +16,19 @@ public class Workspace implements Scene {
 	private Vector cameraTarget;
 	private double cameraRotation = 0;
 	private Sprite spr = new Sprite("hd.png");
+	private ArrayList<GameObject> objects = new ArrayList<>();
 
 	@Override
 	public void init() {
 		cameraTarget = new Vector(0, 0, 1);
+
+		for (int i = 0; i < 200; i++) {
+			for (int j = 0; j < 200; j++) {
+				GameObject obj = new GameObject(i * 100, j * 100, 100, 100);
+				obj.sprite = spr;
+				objects.add(obj);
+			}
+		}
 	}
 
 	@Override
@@ -56,10 +66,8 @@ public class Workspace implements Scene {
 
 	@Override
 	public void render() {
-		for (int i = 0; i < 50; i++)
-			for (int j = 0; j < 50; j++)
-				Renderer.image(spr,
-						String.format("{x:%d, y:%d, width:%d, height:%d}", 200 + i * 50, 200 + j * 50, 50, 50));
+		for(int i=0; i<objects.size(); i++)
+			objects.get(i).render();
 	}
 
 }

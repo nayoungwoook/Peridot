@@ -56,11 +56,7 @@ public class GameObject implements Comparable<GameObject> {
 		object.parent = null;
 	}
 
-	public void _render(Graphics2D g) {
-		if (sprite == null)
-			return;
-
-		/* Actual object rendering */
+	public void calculateRender() {
 
 		float xx = 0f, yy = 0f;
 		if (parent != null) {
@@ -85,6 +81,13 @@ public class GameObject implements Comparable<GameObject> {
 
 		renderPosition.x -= renderWidth / 2;
 		renderPosition.y -= renderHeight / 2;
+	}
+
+	public void _render(Graphics2D g) {
+		if (sprite == null)
+			return;
+
+		/* Actual object rendering */
 
 		AffineTransform backup = g.getTransform();
 		g.translate(this.renderPosition.x, this.renderPosition.y);
@@ -98,7 +101,9 @@ public class GameObject implements Comparable<GameObject> {
 
 	public void render() {
 		/* Add this object into render queue */
-		Component.renderQueue.add(this);
+		calculateRender();
+		if (rendering)
+			Component.renderQueue.add(this);
 	}
 
 	public void tick() {
