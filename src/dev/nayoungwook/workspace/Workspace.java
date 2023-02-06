@@ -4,7 +4,6 @@ import java.awt.event.KeyEvent;
 import java.util.ArrayList;
 
 import dev.nayoungwook.peridot.Camera;
-import dev.nayoungwook.peridot.Component;
 import dev.nayoungwook.peridot.input.Input;
 import dev.nayoungwook.peridot.math.Vector;
 import dev.nayoungwook.peridot.object.GameObject;
@@ -22,10 +21,11 @@ public class Workspace implements Scene {
 	public void init() {
 		cameraTarget = new Vector(0, 0, 1);
 
-		for (int i = 0; i < 200; i++) {
-			for (int j = 0; j < 200; j++) {
+		for (int i = 0; i < 100; i++) {
+			for (int j = 0; j < 100; j++) {
 				GameObject obj = new GameObject(i * 100, j * 100, 100, 100);
 				obj.sprite = spr;
+				obj.anchor.x = 0.5f;
 				objects.add(obj);
 			}
 		}
@@ -44,9 +44,9 @@ public class Workspace implements Scene {
 			cameraTarget.x += movespeed;
 
 		if (Input.keys[KeyEvent.VK_E])
-			cameraRotation += 0.05;
+			cameraRotation += 10;
 		if (Input.keys[KeyEvent.VK_Q])
-			cameraRotation -= 0.05;
+			cameraRotation -= 10;
 
 		if (Input.mouseScroll == 1)
 			cameraTarget.z -= 0.2;
@@ -59,14 +59,17 @@ public class Workspace implements Scene {
 
 		Camera.rotation += (cameraRotation - Camera.rotation) / 10;
 
-		Camera.position.x += (cameraTarget.x - Component.width / 2 - Camera.position.x) / 5;
-		Camera.position.y += (cameraTarget.y - Component.height / 2 - Camera.position.y) / 5;
+		Camera.position.x += (cameraTarget.x - Camera.position.x) / 5;
+		Camera.position.y += (cameraTarget.y - Camera.position.y) / 5;
 		Camera.position.z += (cameraTarget.z - Camera.position.z) / 10;
+
+		for (int i = 0; i < objects.size(); i++)
+			objects.get(i).rotation += 2;
 	}
 
 	@Override
 	public void render() {
-		for(int i=0; i<objects.size(); i++)
+		for (int i = 0; i < objects.size(); i++)
 			objects.get(i).render();
 	}
 

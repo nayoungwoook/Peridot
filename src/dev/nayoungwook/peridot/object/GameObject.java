@@ -91,7 +91,8 @@ public class GameObject implements Comparable<GameObject> {
 
 		AffineTransform backup = g.getTransform();
 		g.translate(this.renderPosition.x, this.renderPosition.y);
-		g.rotate(rotation + Camera.rotation, this.renderWidth * anchor.x, this.renderHeight * anchor.y);
+		g.rotate((rotation + Camera.rotation) * Math.PI / 180, this.renderWidth * anchor.x,
+				this.renderHeight * anchor.y);
 
 		if (visible)
 			g.drawImage(sprite.image, 0, 0, renderWidth, renderHeight, null);

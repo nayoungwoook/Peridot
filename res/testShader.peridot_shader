@@ -1,5 +1,8 @@
 [PeridotShader 1.0]
 
 Shader {
-
+	tint {
+		rgb(40, 10, 10)
+	},
+	
 }
